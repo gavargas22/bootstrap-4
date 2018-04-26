@@ -80,15 +80,15 @@ var DateTimePicker = function ($) {
         disabledDates: false,
         enabledDates: false,
         icons: {
-            time: 'fa fa-clock-o',
-            date: 'fa fa-calendar',
-            up: 'fa fa-arrow-up',
-            down: 'fa fa-arrow-down',
-            previous: 'fa fa-chevron-left',
-            next: 'fa fa-chevron-right',
-            today: 'fa fa-calendar-check-o',
-            clear: 'fa fa-delete',
-            close: 'fa fa-times'
+            time: 'far fa-clock',
+            date: 'far fa-calendar-alt',
+            up: 'fas fa-arrow-up',
+            down: 'fas fa-arrow-down',
+            previous: 'fas fa-chevron-left',
+            next: 'fas fa-chevron-right',
+            today: 'far fa-calendar-check',
+            clear: 'far fa-trash-alt',
+            close: 'fas fa-times'
         },
         tooltips: {
             today: 'Go to today',
@@ -1641,7 +1641,7 @@ var TempusDominusBootstrap4 = function ($) {
         };
 
         TempusDominusBootstrap4.prototype._getDatePickerTemplate = function _getDatePickerTemplate() {
-            var headTemplate = $('<thead>').append($('<tr>').append($('<th>').addClass('prev').attr('data-action', 'previous').append($('<span>').addClass(this._options.icons.previous))).append($('<th>').addClass('picker-switch').attr('data-action', 'pickerSwitch').attr('colspan', '' + (this._options.calendarWeeks ? '6' : '5'))).append($('<th>').addClass('next').attr('data-action', 'next').append($('<span>').addClass(this._options.icons.next)))),
+            var headTemplate = $('<thead>').append($('<tr>').append($('<th>').addClass('prev').attr('data-action', 'previous').append($('<i>').addClass(this._options.icons.previous))).append($('<th>').addClass('picker-switch').attr('data-action', 'pickerSwitch').attr('colspan', '' + (this._options.calendarWeeks ? '6' : '5'))).append($('<th>').addClass('next').attr('data-action', 'next').append($('<i>').addClass(this._options.icons.next)))),
                 contTemplate = $('<tbody>').append($('<tr>').append($('<td>').attr('colspan', '' + (this._options.calendarWeeks ? '8' : '7'))));
 
             return [$('<div>').addClass('datepicker-days').append($('<table>').addClass('table table-sm').append(headTemplate).append($('<tbody>'))), $('<div>').addClass('datepicker-months').append($('<table>').addClass('table-condensed').append(headTemplate.clone()).append(contTemplate.clone())), $('<div>').addClass('datepicker-years').append($('<table>').addClass('table-condensed').append(headTemplate.clone()).append(contTemplate.clone())), $('<div>').addClass('datepicker-decades').append($('<table>').addClass('table-condensed').append(headTemplate.clone()).append(contTemplate.clone()))];
@@ -1657,7 +1657,7 @@ var TempusDominusBootstrap4 = function ($) {
                     href: '#',
                     tabindex: '-1',
                     'title': this._options.tooltips.incrementHour
-                }).addClass('btn').attr('data-action', 'incrementHours').append($('<span>').addClass(this._options.icons.up))));
+                }).addClass('btn').attr('data-action', 'incrementHours').append($('<i>').addClass(this._options.icons.up))));
                 middleRow.append($('<td>').append($('<span>').addClass('timepicker-hour').attr({
                     'data-time-component': 'hours',
                     'title': this._options.tooltips.pickHour
@@ -1751,7 +1751,7 @@ var TempusDominusBootstrap4 = function ($) {
                     tabindex: '-1',
                     'data-action': 'today',
                     'title': this._options.tooltips.today
-                }).append($('<span>').addClass(this._options.icons.today))));
+                }).append($('<i>').addClass(this._options.icons.today))));
             }
             if (!this._options.sideBySide && this._hasDate() && this._hasTime()) {
                 row.push($('<td>').append($('<a>').attr({
@@ -1759,7 +1759,7 @@ var TempusDominusBootstrap4 = function ($) {
                     tabindex: '-1',
                     'data-action': 'togglePicker',
                     'title': this._options.tooltips.selectTime
-                }).append($('<span>').addClass(this._options.icons.time))));
+                }).append($('<i>').addClass(this._options.icons.time))));
             }
             if (this._options.buttons.showClear) {
                 row.push($('<td>').append($('<a>').attr({
@@ -1767,7 +1767,7 @@ var TempusDominusBootstrap4 = function ($) {
                     tabindex: '-1',
                     'data-action': 'clear',
                     'title': this._options.tooltips.clear
-                }).append($('<span>').addClass(this._options.icons.clear))));
+                }).append($('<i>').addClass(this._options.icons.clear))));
             }
             if (this._options.buttons.showClose) {
                 row.push($('<td>').append($('<a>').attr({
@@ -1775,7 +1775,7 @@ var TempusDominusBootstrap4 = function ($) {
                     tabindex: '-1',
                     'data-action': 'close',
                     'title': this._options.tooltips.close
-                }).append($('<span>').addClass(this._options.icons.close))));
+                }).append($('<i>').addClass(this._options.icons.close))));
             }
             return row.length === 0 ? '' : $('<table>').addClass('table-condensed').append($('<tbody>').append($('<tr>').append(row)));
         };
@@ -2025,19 +2025,19 @@ var TempusDominusBootstrap4 = function ($) {
             }
 
             if (startDecade.year() - 10 < 0) {
-                html += '<span>&nbsp;</span>';
+                html += '<i>&nbsp;<i>';
             } else {
-                html += '<span data-action="selectDecade" class="decade old" data-selection="' + (startDecade.year() + 6) + '">' + (startDecade.year() - 10) + '</span>';
+                html += '<span data-action="selectDecade" class="decade old" data-selection="' + (startDecade.year() + 6) + '">' + (startDecade.year() - 10) + '<i>';
             }
 
             while (!startDecade.isAfter(endDecade, 'y')) {
                 endDecadeYear = startDecade.year() + 11;
                 minDateDecade = this._options.minDate && this._options.minDate.isAfter(startDecade, 'y') && this._options.minDate.year() <= endDecadeYear;
                 maxDateDecade = this._options.maxDate && this._options.maxDate.isAfter(startDecade, 'y') && this._options.maxDate.year() <= endDecadeYear;
-                html += '<span data-action="selectDecade" class="decade' + (this._getLastPickedDate().isAfter(startDecade) && this._getLastPickedDate().year() <= endDecadeYear ? ' active' : '') + (!this._isValid(startDecade, 'y') && !minDateDecade && !maxDateDecade ? ' disabled' : '') + '" data-selection="' + (startDecade.year() + 6) + '">' + startDecade.year() + '</span>';
+                html += '<span data-action="selectDecade" class="decade' + (this._getLastPickedDate().isAfter(startDecade) && this._getLastPickedDate().year() <= endDecadeYear ? ' active' : '') + (!this._isValid(startDecade, 'y') && !minDateDecade && !maxDateDecade ? ' disabled' : '') + '" data-selection="' + (startDecade.year() + 6) + '">' + startDecade.year() + '<i>';
                 startDecade.add(10, 'y');
             }
-            html += '<span data-action="selectDecade" class="decade old" data-selection="' + (startDecade.year() + 6) + '">' + startDecade.year() + '</span>';
+            html += '<span data-action="selectDecade" class="decade old" data-selection="' + (startDecade.year() + 6) + '">' + startDecade.year() + '<i>';
 
             decadesView.find('td').html(html);
         };
